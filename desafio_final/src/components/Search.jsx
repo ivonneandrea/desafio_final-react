@@ -2,30 +2,27 @@ import { useEffect } from "react";
 
 const Search = ({ characters, search, setSearch, setFilteredData }) => {
     // set search so it captures the input
-    const inputFilter = () => {
+    const inputFilter = (e) => {
         setSearch(e.target.value);
     };
 
     // useEffect with condition to show characters or the filteredData
     useEffect(() => {
-        if (!search) {
-            setFilteredData(characters);
-        } else {
-            const findWord = search.toLowerCase();
-            const filterResponse = characters.filter((character) =>
+      const findWord = search.toLowerCase();
+        setFilteredData(
+                !search
+                ? characters
+                : characters.filter((character) =>
                 character.name.toLowerCase().includes(findWord)
-            );
-            setFilteredData(filterResponse);
-        }
-    }, [characters, search, setSearch, setFilteredData]);
+            )
+        );
+        
+    }, [characters, search, setFilteredData]);
 
     return (
         <>
             <header>
-                <img
-                    src=""
-                    alt=""
-                />
+              <h1>Pokemons</h1>
                 <section className="searchSection">
                     <input
                         className="form-control mb-3"
@@ -33,7 +30,7 @@ const Search = ({ characters, search, setSearch, setFilteredData }) => {
                         name="search"
                         id="search"
                         value={search}
-                        placeholder="Encuentra tu personaje favorito de los simpsons"
+                        placeholder="Encuentra tu personaje de pokemons"
                         onChange={inputFilter}
                     />
                 </section>

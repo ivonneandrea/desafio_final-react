@@ -5,17 +5,16 @@ const MyApi = ({ setCharacters, filteredData }) => {
     // function that brings the information from the API
     const getCharacters = async () => {
         try {
-            const url = "https://api.sampleapis.com/simpsons/characters";
+            const url = "https://pokeapi.co/api/v2/pokemon?limit=200";
             
             const response = await fetch(url);
             const data = await response.json();
             const api = data.results
                 .map((e) => {
                     return {
-                        
+                        id: e.url.split("/")[6], // Extracting id from the URL
                         name: e.name,
-                        normalized_name: e.normalized_name,
-                        gender: e.gender,
+                       
                     
                     };
                 })
@@ -33,12 +32,14 @@ const MyApi = ({ setCharacters, filteredData }) => {
     return (
         <>
             <main>
-                {filteredData.map((character, e) => (
-                    <section key={e}>
+                {filteredData.map((character) => (
+                    <section key={character.id} className="container-pokemons">
                         <Card className="card">
                             <Card.Img
                                 variant="top"
-                                src={character.id}
+                                src={`
+                                https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${character.id}.png
+                                `}
                                 alt={character.name}
                             />
                             <Card.Body className="cardBody">
@@ -46,17 +47,10 @@ const MyApi = ({ setCharacters, filteredData }) => {
                                     <h2>{character.id}</h2>
                                 </Card.Title>
                                 <Card.Text>
-                                    <strong id="name">Status:</strong>{" "}
+                                    <strong id="name">Nombre:</strong>{" "}
                                     {character.name}
                                 </Card.Text>
-                                <Card.Text>
-                                    <strong id="normalized_name">Species:</strong>{" "}
-                                    {character.normalized_name}
-                                </Card.Text>
-                                <Card.Text>
-                                    <strong id="origin">Origin:</strong>{" "}
-                                    {character.gender}
-                                </Card.Text>
+                                
                             </Card.Body>
                         </Card>
                     </section>

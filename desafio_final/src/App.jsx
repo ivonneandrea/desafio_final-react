@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyApi from "./components/MyApi";
 import Search from "./components/Search";
 
+
 function App() {
     // initial states
     const [characters, setCharacters] = useState([]);
