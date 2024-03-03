@@ -1,39 +1,69 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from "react";
+import Card from "react-bootstrap/Card";
 
-function MyApi({ pokemons }) {
-  const [] = useState([])
+const MyApi = ({ setCharacters, filteredData }) => {
+    // function that brings the information from the API
+    const getCharacters = async () => {
+        try {
+            const url = "https://api.sampleapis.com/simpsons/characters";
+            
+            const response = await fetch(url);
+            const data = await response.json();
+            const api = data.results
+                .map((e) => {
+                    return {
+                        
+                        name: e.name,
+                        normalized_name: e.normalized_name,
+                        gender: e.gender,
+                    
+                    };
+                })
+                .sort((a, b) => a.name.localeCompare(b.name));
+            setCharacters(api);
+        } catch (error) {
+            console.log("Couldn't get the API information", error);
+        }
+    };
 
-  useEffect(() => {
-   pokemons(id)
-  }, [])
+    useEffect(() => {
+        getCharacters();
+    }, []);
 
+    return (
+        <>
+            <main>
+                {filteredData.map((character, e) => (
+                    <section key={e}>
+                        <Card className="card">
+                            <Card.Img
+                                variant="top"
+                                src={character.id}
+                                alt={character.name}
+                            />
+                            <Card.Body className="cardBody">
+                                <Card.Title>
+                                    <h2>{character.id}</h2>
+                                </Card.Title>
+                                <Card.Text>
+                                    <strong id="name">Status:</strong>{" "}
+                                    {character.name}
+                                </Card.Text>
+                                <Card.Text>
+                                    <strong id="normalized_name">Species:</strong>{" "}
+                                    {character.normalized_name}
+                                </Card.Text>
+                                <Card.Text>
+                                    <strong id="origin">Origin:</strong>{" "}
+                                    {character.gender}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </section>
+                ))}
+            </main>
+        </>
+    );
+};
 
-  return (
-    <>
-      <div className="main-container">
-        <h1>Pokemons</h1>
-        <p>Search for a pokemon:</p>
-        <input type="text" onChange={handleChange} />
-        <div className="container-pokemons">
-          {pokemons.map((pokemon, index) => {
-            const id = pokemon.url.split("/")[6];
-            return (
-              <div className="card" key={index}>
-                <p key={index}>{pokemon.name}</p>
-                <img
-                  src={`
-          https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png
-          `}
-                  alt={pokemon.name}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </>
-  )
-}
-
-export default MyApi
-
+export default MyApi;
