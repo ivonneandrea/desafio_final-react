@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 
 const MyApi = ({ setCharacters, filteredData }) => {
-    // function that brings the information from the API
+    
     const getCharacters = async () => {
         try {
             const url = "https://pokeapi.co/api/v2/pokemon?limit=200";
@@ -12,7 +12,7 @@ const MyApi = ({ setCharacters, filteredData }) => {
             const api = data.results
                 .map((e) => {
                     return {
-                        id: e.url.split("/")[6], // Extracting id from the URL
+                        id: e.url.split("/")[6], 
                         name: e.name,
                        
                     

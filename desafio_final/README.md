@@ -1,8 +1,3 @@
-# React + Vite
+LInk explicacion Codigo Prueba Api 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://www.loom.com/share/2999e27d53ab4bc6965163fea0a03ef7?sid=7187e814-c761-4021-b6f8-7c6cc5a9512e
